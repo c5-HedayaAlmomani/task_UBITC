@@ -1,9 +1,14 @@
 
 import { useState } from "react";
 import axios from "axios";
+
+import Upload from "../clawdenary";
+import  { useContext } from "react";
+import { UserContext} from "../../App";
 import "./style.css"
+ 
 const Update=()=>{
-  const img="./mm.png"
+    let {img, setImg ,token, setToken } = useContext(UserContext);
     const [fistName, setFistName] = useState("");
 
     const [lastName, setLastname] = useState("");
@@ -20,6 +25,11 @@ const Update=()=>{
             lastName,
             email,
             password,
+            img
+          },{
+            headers: {
+              authorization: "Bearer " + token,
+            },
           })
           .then((result) => {
             console.log(result);
@@ -27,14 +37,15 @@ const Update=()=>{
           .catch((err) => {
             console.log(err);
           });
+
       };
 
     return <div className="alll">
 
 
+<Upload />
 
 
-{/* 
 <div className="update" >
         <input
           placeholder="First Name"
@@ -61,33 +72,22 @@ const Update=()=>{
           }}
         ></input>
 
-        <button
+        <button className="upd"
           onClick={() => {
             update();
+            console.log({ll:img});
           }}
         >
           Update
         </button>
-      </div> */}
-
-
-
-
-
-
-      {/* <div>
-        <h3>Edit Profile</h3>
-    <img/>
       </div>
 
-      <img/>
 
 
-      <h3>Full Name</h3>
-      <input></input>
-      <h3>Email</h3>
-      <input></input>
-      */}
+
+
+
+
 
     </div>
 }

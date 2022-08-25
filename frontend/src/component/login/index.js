@@ -1,7 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+import  { useContext } from "react";
+import { UserContext} from "../../App";
 import "./style.css"
 function Login() {
+  let {token, setToken } = useContext(UserContext);
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
@@ -14,6 +17,9 @@ function Login() {
       })
       .then((result) => {
         console.log(result);
+        console.log(result.data.token);
+        setToken(result.data.token)
+        localStorage.setItem("token", token);
       })
       .catch((err) => {
         console.log(err);
